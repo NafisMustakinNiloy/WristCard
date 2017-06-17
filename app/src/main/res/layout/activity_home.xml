@@ -1,10 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/backLinearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.nafismustakin.wristcard.HomeActivity">
 
+    <!-- top toolbar -->
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/toolBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/buttonBPM"
+            android:layout_width="140dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/cyan_back_white_border"
+            android:text="@string/bpm_button" />
+
+        <Button
+            android:id="@+id/buttonPressure"
+            android:layout_width="140dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/cyan_back_white_border"
+            android:text="@string/blood_pressure_button" />
+
+        <Button
+            android:id="@+id/buttonGlucose"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/cyan_back_white_border"
+            android:text="@string/glucose_button" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <include layout="@layout/layout_center_viewpager"/>
+
+        <include layout="@layout/layout_bottom_navigation_view"/>
+
+    </RelativeLayout>
+</LinearLayout>
