@@ -6,4 +6,6 @@
     <string name="glucose_button">Glucose</string>
     <string name="blood_pressure_button">Blood Pressure</string>
     <string name="bpm_button">Heart Rate</string>
+    <string name="tab_text">TextView</string>
+    <string name="value_mode">Current Value:</string>
 </resources>

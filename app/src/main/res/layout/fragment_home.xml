@@ -3,12 +3,69 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:id="@+id/toolBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:layout_alignParentTop="true">
+
+        <Button
+            android:id="@+id/buttonBPM"
+            android:layout_width="140dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/cyan_right_white_border"
+            android:onClick="switchToBPM"
+            android:text="@string/bpm_button" />
+
+        <Button
+            android:id="@+id/buttonPressure"
+            android:layout_width="140dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/cyan_back"
+            android:onClick="switchToPressure"
+            android:text="@string/blood_pressure_button" />
+
+        <Button
+            android:id="@+id/buttonGlucose"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/cyan_white_left_border"
+            android:onClick="switchToGlucoseLevel"
+            android:text="@string/glucose_button" />
+
+    </LinearLayout>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Home Fragment"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:textSize="20sp"/>
+        android:text="@string/tab_text"
+        android:id="@+id/tabText"
+        android:textSize="30sp"
+        android:layout_below="@+id/toolBarLayout"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="15dp"
+        android:textColor="@color/colorPrimaryDark"/>
+
+    <com.jjoe64.graphview.GraphView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_below="@+id/tabText"
+        android:layout_marginTop="10dp"
+        android:id="@+id/graphView"
+        android:background="@color/tab_checked"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/value_mode"
+        android:id="@+id/valueText"
+        android:textSize="20sp"
+        android:layout_below="@+id/graphView"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:textColor="@color/colorPrimary"/>
 
 </RelativeLayout>

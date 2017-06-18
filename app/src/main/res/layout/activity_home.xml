@@ -1,53 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/backLinearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="@color/white"
     tools:context="com.example.nafismustakin.wristcard.HomeActivity">
 
-    <!-- top toolbar -->
 
-    <LinearLayout
-        android:id="@+id/toolBarLayout"
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottomNavViewBar"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:itemBackground="@color/colorAccent"
+        app:itemIconTint="@drawable/bottom_navigation_color_selector"
+        app:itemTextColor="@drawable/bottom_navigation_color_selector"
+        app:menu="@menu/bottom_navigation_menu" />
 
-        <Button
-            android:id="@+id/buttonBPM"
-            android:layout_width="140dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/cyan_back_white_border"
-            android:text="@string/bpm_button" />
-
-        <Button
-            android:id="@+id/buttonPressure"
-            android:layout_width="140dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/cyan_back_white_border"
-            android:text="@string/blood_pressure_button" />
-
-        <Button
-            android:id="@+id/buttonGlucose"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/cyan_back_white_border"
-            android:text="@string/glucose_button" />
-
-    </LinearLayout>
-
-    <RelativeLayout
+    <android.support.v4.view.ViewPager
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
+        android:layout_above="@+id/bottomNavViewBar"
+        android:layout_alignParentTop="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-        <include layout="@layout/layout_center_viewpager"/>
 
-        <include layout="@layout/layout_bottom_navigation_view"/>
-
-    </RelativeLayout>
-</LinearLayout>
+</RelativeLayout>

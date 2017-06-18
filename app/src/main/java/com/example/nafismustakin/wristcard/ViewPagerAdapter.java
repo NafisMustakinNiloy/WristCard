@@ -11,22 +11,22 @@ import java.util.List;
  * Created by Nafis Mustakin on 18-Jun-17.
  */
 
-public class SectionPagerAdapter extends FragmentPagerAdapter {
+public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     private final List<Fragment> fragmentList = new ArrayList<>();
 
-    public SectionPagerAdapter(FragmentManager fm){
+    public ViewPagerAdapter(FragmentManager fm){
         super(fm);
     }
 
     @Override
     public Fragment getItem(int position) {
-        return null;
+        return fragmentList.get(position);
     }
 
     @Override
     public int getCount() {
-        return 0;
+        return fragmentList.size();
     }
 
     public void addFragment(Fragment fragment){
