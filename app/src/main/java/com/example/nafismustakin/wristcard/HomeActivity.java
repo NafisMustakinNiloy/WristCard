@@ -16,7 +16,19 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.Viewport;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
+
+import java.util.Random;
+
 public class HomeActivity extends AppCompatActivity {
+
+
+    private LineGraphSeries<DataPoint> series;
+    private static final Random RANDOM = new Random();
+    private int lastX= 0;
 
     BottomNavigationView bottomNavigationView;
 
@@ -85,8 +97,44 @@ public class HomeActivity extends AppCompatActivity {
                 }
         );
 
+        GraphView graphView = (GraphView)findViewById(R.id.graphView);
+
+        Viewport viewport = graphView.getViewport();
+        viewport.setYAxisBoundsManual(true);
+        viewport.setMinY(0);
+        viewport.setMaxY(200);
         setupViewPager(viewPager);
 
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for(int i= 0; i<100; i++){
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            addEntry();
+                        }
+                    });
+
+                    //sleep to slow down
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
+
+    private void addEntry(){
+        series.appendData(new DataPoint(lastX++, RANDOM.nextDouble()*10d), true, 200);
     }
 
     private void setupViewPager(ViewPager viewPager){

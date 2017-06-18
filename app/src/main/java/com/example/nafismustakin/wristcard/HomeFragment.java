@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.jjoe64.graphview.GraphView;
+
 /**
  * Created by Nafis Mustakin on 18-Jun-17.
  */
@@ -16,6 +18,7 @@ import android.widget.TextView;
 public class HomeFragment extends Fragment implements View.OnClickListener{
 
     TextView tabText, valueText;
+    private static int mode = 0;
 
     public HomeFragment(){
 
@@ -31,6 +34,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         Button buttonBPM = (Button)view.findViewById(R.id.buttonBPM);
         Button buttonGlucose = (Button)view.findViewById(R.id.buttonGlucose);
         Button buttonPressure = (Button)view.findViewById(R.id.buttonPressure);
+
+        GraphView graphView = (GraphView)view.findViewById(R.id.graphView);
+
 
         buttonBPM.setOnClickListener(this);
         buttonPressure.setOnClickListener(this);
