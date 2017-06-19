@@ -26,9 +26,6 @@ import java.util.Random;
 public class HomeActivity extends AppCompatActivity {
 
 
-    private LineGraphSeries<DataPoint> series;
-    private static final Random RANDOM = new Random();
-    private int lastX= 0;
 
     BottomNavigationView bottomNavigationView;
 
@@ -97,12 +94,14 @@ public class HomeActivity extends AppCompatActivity {
                 }
         );
 
-        GraphView graphView = (GraphView)findViewById(R.id.graphView);
+        //GraphView graphView = (GraphView)findViewById(R.id.graphView);
+        //series = new LineGraphSeries<DataPoint>();
+        //graphView.addSeries(series);
 
-        Viewport viewport = graphView.getViewport();
-        viewport.setYAxisBoundsManual(true);
-        viewport.setMinY(0);
-        viewport.setMaxY(200);
+        //Viewport viewport = graphView.getViewport();
+        //viewport.setYAxisBoundsManual(true);
+        //viewport.setMinY(0);
+        //viewport.setMaxY(200);
         setupViewPager(viewPager);
 
 
@@ -111,31 +110,9 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for(int i= 0; i<100; i++){
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            addEntry();
-                        }
-                    });
-
-                    //sleep to slow down
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
+        homeFragment.getGraphData(this);
     }
 
-    private void addEntry(){
-        series.appendData(new DataPoint(lastX++, RANDOM.nextDouble()*10d), true, 200);
-    }
 
     private void setupViewPager(ViewPager viewPager){
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());

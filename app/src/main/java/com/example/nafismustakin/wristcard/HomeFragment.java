@@ -1,5 +1,7 @@
 package com.example.nafismustakin.wristcard;
 
+import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,6 +12,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.Viewport;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
+
+import java.util.Random;
 
 /**
  * Created by Nafis Mustakin on 18-Jun-17.
@@ -18,7 +25,12 @@ import com.jjoe64.graphview.GraphView;
 public class HomeFragment extends Fragment implements View.OnClickListener{
 
     TextView tabText, valueText;
+    GraphView graphView;
+    private LineGraphSeries<DataPoint> series;
     private static int mode = 0;
+
+    private static final Random RANDOM = new Random();
+    private int lastX= 0;
 
     public HomeFragment(){
 
@@ -35,8 +47,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         Button buttonGlucose = (Button)view.findViewById(R.id.buttonGlucose);
         Button buttonPressure = (Button)view.findViewById(R.id.buttonPressure);
 
-        GraphView graphView = (GraphView)view.findViewById(R.id.graphView);
+        graphView = (GraphView)view.findViewById(R.id.graphOutput);
 
+        series = new LineGraphSeries<>();
+        graphView.addSeries(series);
+
+        Viewport viewport = graphView.getViewport();
+
+        viewport.setYAxisBoundsManual(true);
+        viewport.setMinY(0);
+        viewport.setMaxY(200);
 
         buttonBPM.setOnClickListener(this);
         buttonPressure.setOnClickListener(this);
@@ -58,4 +78,41 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 break;
         }
     }
+
+
+    private void addEntry(){
+        double y = RANDOM.nextDouble()*150d;
+        System.out.println("X=" + (lastX+1) + ", Y=" +y);
+        series.appendData(new DataPoint(lastX++, y), true, 20);
+        graphView.addSeries(series);
+    }
+
+    public void getGraphData(final Activity activity){
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for(int i= 0; i<100; i++){
+                    if(getActivity() != null)
+                    {
+                        activity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                addEntry();
+                            }
+                        });
+                    }
+                    //sleep to slow down
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
+    }
+
+
+
 }

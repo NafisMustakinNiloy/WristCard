@@ -6,7 +6,7 @@
     <string name="glucose_button">Glucose</string>
     <string name="blood_pressure_button">Blood Pressure</string>
     <string name="bpm_button">Heart Rate</string>
-    <string name="tab_text">TextView</string>
+    <string name="tab_text">Heart Rate</string>
     <string name="value_mode">Current Value:</string>
     <string name="title_activity_login">Sign in</string>
 
@@ -25,4 +25,7 @@
     <string name="save_button">Save Changes</string>
     <string name="text_name">Name</string>
     <string name="text_email">name@gmail.com</string>
+    <string name="variability_text">Variability:</string>
+    <string name="current_value">70 BPM</string>
+    <string name="variability_value">2.3%</string>
 </resources>
