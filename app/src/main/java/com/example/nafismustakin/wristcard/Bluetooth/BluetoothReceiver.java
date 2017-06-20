@@ -29,14 +29,16 @@ public class BluetoothReceiver {
     int counter;
     volatile boolean stopWorker;
 
-    String deviceName = "HC-05";
+    private static final String deviceName = "HC-05";
 
     private static final String TAG = "BluetoothReceiver";
 
-    void findBlueTooth(){
+    public BluetoothReceiver(){}
+
+    public void findBlueTooth(){
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if(bluetoothAdapter == null){
-            Log.d(TAG, "No bluetooth adapter availabe");
+            Log.d(TAG, "No bluetooth adapter available");
         }
         if(!bluetoothAdapter.isEnabled()){
             Intent enableBT = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
@@ -47,13 +49,14 @@ public class BluetoothReceiver {
             for(BluetoothDevice device:pairedDevices){
                 if(device.getName().equals(deviceName)){
                     bluetoothDevice = device;
+                    Log.d(TAG, "Device Paired");
                     break;
                 }
             }
         }
     }
 
-    void openBlueTooth() throws IOException{
+    public void openBlueTooth() throws IOException{
         UUID uuid = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
         socket =bluetoothDevice.createRfcommSocketToServiceRecord(uuid);
         socket.connect();
@@ -62,7 +65,7 @@ public class BluetoothReceiver {
         startListeningForData();
     }
 
-    void startListeningForData(){
+    private void startListeningForData(){
         final Handler handler = new Handler();
         final byte delimiter = (byte)'\n';
 
@@ -90,7 +93,7 @@ public class BluetoothReceiver {
                                             handler.post(new Runnable() {
                                                 @Override
                                                 public void run() {
-                                                    System.out.println(data);
+                                                    Log.d(TAG, data);
                                                 }
                                             });
                                         }
